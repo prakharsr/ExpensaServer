@@ -1,0 +1,29 @@
+<div id="navbar">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light" routerLink="/">Expensa</a>
+      <button class="navbar-toggler mr-2" (click)="toggleNavbar()" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" [class.show]="!isNavbarCollapsed">
+        <ul class="navbar-nav mr-auto" *ngIf="!api.isLoggedIn"></ul>
+        
+        <ul class="navbar-nav" *ngIf="api.isLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/" (click)="api.logout();collapseNavbar()">Log Out</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav" *ngIf="!api.isLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/register">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" (click)="collapseNavbar()" routerLink="/login">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>

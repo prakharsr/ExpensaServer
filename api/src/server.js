@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 const auth = require('./middlewares/auth');
 var mongoose = require('mongoose');
 var cors = require('cors');
-var router = require('./router');
+var userRouter = require('./routers/userRouter.js');
 var errorHandler = require('./middlewares/errorHandler');
 
 var express = require('express');
@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
 
-app.use('/api', auth, router);
+app.use('/api/user', auth(), userRouter);
 
 mongoose.connect(config.DbLink,{ useNewUrlParser: true, useCreateIndex: true }, err => {
 	if (err) {
@@ -33,12 +33,10 @@ mongoose.connect(config.DbLink,{ useNewUrlParser: true, useCreateIndex: true }, 
 	}
 	else console.log('Connected to Database');
 });
-
+app.use(errorHandler);
 app.get('*', (req, res) => {
 	res.send({ content: "Not Found" });
 });
-
-app.use(errorHandler);
 app.listen(config.Port, () => console.log(`Listening on Port: ${config.Port}`));
 
 

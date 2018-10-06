@@ -1,14 +1,18 @@
-var user = require('../services/user');
+var user = require('../services/userService');
 
 module.exports.authenticate = function(req, res, next) {
     user.authenticate(req.body)
-        .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
+        .then(user => user ? res.json(user) : res.status(400).json({ message: 'Mobile No. or password is incorrect' }))
         .catch(err => next(err));
 }
 
 module.exports.register = function(req, res, next) {
     user.create(req.body)
-        .then(() => res.json({}))
+        .then((user) => {
+            res.json({
+            success:true,
+            ...user
+        }) })
         .catch(err => next(err));
 }
 

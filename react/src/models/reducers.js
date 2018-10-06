@@ -39,3 +39,12 @@ export const transactions = (state = [], action) => {
       return state;
   }
 }
+
+export const loggedIn = (state = false, action) => {
+  switch (action.type) {
+    case actionTypes.SET_LOGGEDIN:
+      return action.loggedIn;
+    default:
+      return state;
+  }
+}

@@ -25,3 +25,5 @@ export function loadTransactions() {
       });
   }
 }
+
+export const setLoggedIn = loggedIn => ({ type: actionTypes.SET_LOGGEDIN, loggedIn });
